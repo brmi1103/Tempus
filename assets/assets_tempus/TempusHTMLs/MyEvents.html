@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tempus</title>
+
+    <!-- Existing CSSs -->
+    <!-- Included Calendar.js CSS -->
+    <link rel="stylesheet" href="/easyappointments/node_modules/jcalendar.js/dist/calendar.js">  
+    <!-- Included Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Included Font Awesome CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Additional CSS for NEW Calendars -->
+    <link rel="stylesheet" href="/easyappointments/node_modules/jcalendar.js/test/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+
+    <!-- Existing JavaScripts -->
+    <!-- Included jQuery JavaScript file -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Included Popper JavaScript file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <!-- Included Bootstrap JavaScript file -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Included Calendar.js JavaScript file -->
+    <script src="/easyappointments/node_modules/jcalendar.js/dist/calendar.js"></script>
+    
+    
+    <!-- Additional JavaScript for NEW Calendars -->
+    <script src="/easyappointments/node_modules/jcalendar.js/src/calendar.js"></script>
+
+
+
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+        .header img {
+            height: 125px; /* Adjust as needed */
+        }
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidenav a:hover {
+            color: #F1F1F1;
+        }
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            left: 25px;
+            padding: 16px;
+            transition: 0.3s;
+        }
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+        footer {
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidenav" id="mySidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Home</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+        <a href="#">About Project Tempus</a>
+    </div>
+
+    <div class="header">
+        <span class="menu-icon" onclick="openNav()">&#9776;</span>
+        <img id="header-image" src="/TempusIMAGES/Tempus Logo.png""> 
+    </div>
+
+    <div id="main" class="container-fluid">
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-10">
+                <!-- New Calendar Widgets -->
+                <div id="myCalendar2" style="max-width:100vw;">
+                    <p>Some data that should be cleared.</p>
+                </div>
+                
+                <br>
+
+                <div id="myCalendar1" style="max-width:100vw;">
+                    <p>Some data that should be cleared.</p>
+                </div>
+                <!-- Add other elements here as needed -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-12 col-md-10 offset-md-2">
+                <footer>
+                    &copy; 2024 Tempus. All rights reserved.
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+          // Initialize the new calendars
+          var calendarInstance1 = new calendarJs("myCalendar1", { 
+            manualEditingEnabled: true
+        });
+        var calendarInstance2 = new calendarJs("myCalendar2", { 
+            manualEditingEnabled: true,
+            isWidget: true,
+            onEventsFetch: calendarInstance1.getEvents,
+            autoRefreshTimerDelay: 5000
+        });
+
+
+    var calendarInstance = new calendarJs( "calendar", {
+        views: {
+            fullMonth: {
+                isPinUpViewEnabled: true,
+                pinUpViewImageUrls: [
+                    "https://calendar-js.com/images/top.jpg",
+                    "https://sleeplessocean.com/images/background_main.jpg"
+                ]
+            }
+        }
+    } );
+
+    document.title += " v" + calendarInstance.getVersion();
+    document.getElementById( "header" ).innerText += " - v" + calendarInstance.getVersion();
+</script>
+
+</body>
+</html>
